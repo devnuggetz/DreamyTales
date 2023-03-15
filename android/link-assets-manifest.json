@@ -1,0 +1,33 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Recoleta-Black.ttf",
+      "sha1": "f076bb7f7b3c48e29410b3ddf1c3a22e8d0536a2"
+    },
+    {
+      "path": "assets/fonts/Recoleta-Bold.ttf",
+      "sha1": "119edd0ff6b1d77ec85aa8ac177e1e2783048412"
+    },
+    {
+      "path": "assets/fonts/Recoleta-Light.ttf",
+      "sha1": "cbec329a473fd35dd479b98861a5492380388eed"
+    },
+    {
+      "path": "assets/fonts/Recoleta-Medium.ttf",
+      "sha1": "1b810ed984ced65a641f8a6bee4c2aeaa3660a40"
+    },
+    {
+      "path": "assets/fonts/Recoleta-Regular.ttf",
+      "sha1": "087741250ab835db4e5215f223bf141dac3a9d55"
+    },
+    {
+      "path": "assets/fonts/Recoleta-SemiBold.ttf",
+      "sha1": "42035147d96ac35a0bfefd75c32a0b76bc51e9e2"
+    },
+    {
+      "path": "assets/fonts/Recoleta-Thin.ttf",
+      "sha1": "3d4e2f3c3622e4641be3ba6d45cb1fbe36666e47"
+    }
+  ]
+}
