@@ -17,7 +17,7 @@ export default Layout;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLOURS.BG_PURPLE,
+    backgroundColor: COLOURS.BACKGROUND,
     width: '100%',
     paddingHorizontal: SPACING.LARGE,
     paddingTop: SPACING.MEDIUM,
