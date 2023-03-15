@@ -4,6 +4,7 @@ export const COLOURS = {
   BG_PURPLE: '#462681',
   BACKGROUND: '#FCF4EE',
   PRIMARY: '#FE7A3D',
+  SECONDARY: '#FFE2CD',
 };
 
 export const SPACING = {

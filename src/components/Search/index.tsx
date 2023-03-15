@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Image, StyleSheet, TextInput, View} from 'react-native';
 import React from 'react';
 import {BORDER_RADIUS, COLOURS, SPACING} from '../../common/theme';
 import {TYPOGRAPHY} from '../../common/styles';
