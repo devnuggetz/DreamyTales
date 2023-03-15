@@ -9,7 +9,7 @@ const Search = () => {
     <View style={styles.wrapper}>
       <Image source={SEARCH_ICON} style={styles.search_icon} />
 
-      <TextInput style={styles.input}>Search</TextInput>
+      <TextInput style={styles.input} placeholder="Search your story" />
     </View>
   );
 };

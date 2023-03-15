@@ -1,4 +1,7 @@
 {
   "name": "DreamyTales",
-  "displayName": "DreamyTales"
+  "displayName": "DreamyTales",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-4599375922819673~5852311459"
+  }
 }
