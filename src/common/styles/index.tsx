@@ -19,4 +19,8 @@ export const TYPOGRAPHY = StyleSheet.create({
     fontFamily: 'Recoleta-Medium',
     fontSize: 20,
   },
+  text: {
+    fontFamily: 'Recoleta-Regular',
+    fontSize: 16,
+  },
 });

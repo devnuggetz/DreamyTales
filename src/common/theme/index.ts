@@ -3,6 +3,7 @@ export const COLOURS = {
   WHITE: '#fff',
   BG_PURPLE: '#462681',
   BACKGROUND: '#FCF4EE',
+  PRIMARY: '#FE7A3D',
 };
 
 export const SPACING = {

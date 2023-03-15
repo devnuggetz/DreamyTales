@@ -2,6 +2,7 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {BORDER_RADIUS, COLOURS, SPACING} from '../common/theme';
 import {COMMON_STYLES, TYPOGRAPHY} from '../common/styles';
+import Search from '../components/Search';
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
         }}
         style={styles.banner}
       />
+      <Search />
     </View>
   );
 };
