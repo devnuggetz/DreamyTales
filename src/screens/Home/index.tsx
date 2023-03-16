@@ -5,33 +5,41 @@ import {COMMON_STYLES, TYPOGRAPHY} from '../../common/styles';
 import Search from '../../components/Search';
 import Categories from './Categories';
 import TopStories from './TopStories';
-import Saved from '../../components/Saved';
+import Bookmarks from '../../components/Bookmarks';
+import Layout from '../../common/Layout';
 
-const Home = () => {
+const Home = ({navigation}: Props) => {
+  console.log(navigation);
   return (
-    <View style={{...COMMON_STYLES.full_flex, ...styles.wrapper}}>
-      <View>
-        <View style={styles.topSection}>
-          <View style={{...styles.headingContainer}}>
-            <Text style={{...styles.heading}}>DreamyTales</Text>
-            <Text style={{...TYPOGRAPHY.subHeading}}>
-              What will you listen today?
-            </Text>
+    <Layout>
+      <View style={{...COMMON_STYLES.full_flex, ...styles.wrapper}}>
+        <View>
+          <View style={styles.topSection}>
+            <View style={{...styles.headingContainer}}>
+              <Text style={{...styles.heading}}>DreamyTales</Text>
+              <Text style={{...TYPOGRAPHY.subHeading}}>
+                What will you listen today?
+              </Text>
+            </View>
+            <Bookmarks navigation={navigation} />
           </View>
-          <Saved />
+          <Image
+            source={{
+              uri: 'https://cdni.iconscout.com/illustration/premium/thumb/boy-watching-through-telescope-5982672-4972891.png',
+            }}
+            style={styles.banner}
+          />
+          <Search />
+          <Categories />
+          <TopStories />
         </View>
-        <Image
-          source={{
-            uri: 'https://cdni.iconscout.com/illustration/premium/thumb/boy-watching-through-telescope-5982672-4972891.png',
-          }}
-          style={styles.banner}
-        />
-        <Search />
-        <Categories />
-        <TopStories />
       </View>
-    </View>
+    </Layout>
   );
+};
+
+type Props = {
+  navigation: any;
 };
 
 export default Home;

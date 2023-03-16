@@ -1,17 +1,25 @@
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {BOOKMARK_ICON} from '../../../assets/icons';
 import {COLOURS} from '../../common/theme';
 
-const Saved = () => {
+const Bookmarks = (props: Props) => {
+  const {navigation} = props;
+
+  console.log(navigation);
+
   return (
-    <View>
+    <TouchableOpacity onPress={() => navigation.navigate('Saved')}>
       <Image source={BOOKMARK_ICON} style={styles.icon} />
-    </View>
+    </TouchableOpacity>
   );
 };
 
-export default Saved;
+type Props = {
+  navigation: any;
+};
+
+export default Bookmarks;
 
 const styles = StyleSheet.create({
   icon: {
