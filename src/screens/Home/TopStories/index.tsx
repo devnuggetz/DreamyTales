@@ -1,9 +1,8 @@
 import {FlatList, ListRenderItem, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {TYPOGRAPHY} from '../../../common/styles';
-import {DATA, TOP_STORIES} from '../../../data';
-import CategoryCard from '../../../components/CategoryCard';
-import {Category, Story} from '../../../utils/types';
+import {TOP_STORIES} from '../../../data';
+import {Story} from '../../../utils/types';
 import {COLOURS, SPACING} from '../../../common/theme';
 import TopStoryCard from '../../../components/TopStoryCard';
 

@@ -5,16 +5,20 @@ import {COMMON_STYLES, TYPOGRAPHY} from '../../common/styles';
 import Search from '../../components/Search';
 import Categories from './Categories';
 import TopStories from './TopStories';
+import Saved from '../../components/Saved';
 
 const Home = () => {
   return (
     <View style={{...COMMON_STYLES.full_flex, ...styles.wrapper}}>
       <View>
-        <View style={{...styles.headingContainer}}>
-          <Text style={{...styles.heading}}>DreamyTales</Text>
-          <Text style={{...TYPOGRAPHY.subHeading}}>
-            What will you listen today?
-          </Text>
+        <View style={styles.topSection}>
+          <View style={{...styles.headingContainer}}>
+            <Text style={{...styles.heading}}>DreamyTales</Text>
+            <Text style={{...TYPOGRAPHY.subHeading}}>
+              What will you listen today?
+            </Text>
+          </View>
+          <Saved />
         </View>
         <Image
           source={{
@@ -48,5 +52,10 @@ const styles = StyleSheet.create({
   wrapper: {
     justifyContent: 'space-between',
     paddingBottom: SPACING.X_X_LARGE,
+  },
+  topSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });
