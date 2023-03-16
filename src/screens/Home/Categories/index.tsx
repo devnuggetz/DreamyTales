@@ -6,9 +6,11 @@ import CategoryCard from '../../../components/CategoryCard';
 import {Category} from '../../../utils/types';
 import {COLOURS, SPACING} from '../../../common/theme';
 
-const Categories = () => {
+const Categories = (props: Props) => {
+  const {navigation} = props;
+
   const renderCategory: ListRenderItem<Category> = ({item}) => {
-    return <CategoryCard category={item} />;
+    return <CategoryCard category={item} navigation={navigation} />;
   };
 
   return (
@@ -24,7 +26,9 @@ const Categories = () => {
     </View>
   );
 };
-
+type Props = {
+  navigation: any;
+};
 export default Categories;
 
 const styles = StyleSheet.create({

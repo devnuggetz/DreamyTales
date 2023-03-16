@@ -29,9 +29,9 @@ const Home = ({navigation}: Props) => {
             }}
             style={styles.banner}
           />
-          <Search />
-          <Categories />
-          <TopStories />
+          <Search allowSearch={false} navigation={navigation} />
+          <Categories navigation={navigation} />
+          <TopStories navigation={navigation} />
         </View>
       </View>
     </Layout>

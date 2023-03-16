@@ -1,17 +1,19 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {Story} from '../../utils/types';
+import {NavigationAsProps, Story} from '../../utils/types';
 import {BORDER_RADIUS, COLOURS} from '../../common/theme';
 import {TYPOGRAPHY} from '../../common/styles';
 
 const TopStoryCard = (props: Props) => {
-  const {storyData} = props;
+  const {storyData, navigation} = props;
 
   return (
-    <View style={styles.wrapper}>
+    <TouchableOpacity
+      style={styles.wrapper}
+      onPress={() => navigation.navigate('Story')}>
       <Image source={{uri: storyData.thumbnail}} style={styles.thumbnail} />
       <Text style={styles.title}>{storyData.title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -19,7 +21,7 @@ export default TopStoryCard;
 
 type Props = {
   storyData: Story;
-};
+} & NavigationAsProps;
 
 const styles = StyleSheet.create({
   wrapper: {

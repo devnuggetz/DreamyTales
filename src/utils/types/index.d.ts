@@ -14,3 +14,7 @@ export type Story = {
   tags?: string[];
   audioFile?: string;
 };
+
+export type NavigationAsProps = {
+  navigation: any;
+};

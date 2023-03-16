@@ -1,21 +1,23 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Category} from '../../utils/types';
 import {BORDER_RADIUS, COLOURS, SPACING} from '../../common/theme';
 import {TYPOGRAPHY} from '../../common/styles';
 
 const CategoryCard = (props: Props) => {
-  const {category} = props;
+  const {category, navigation} = props;
 
   return (
-    <View style={styles.wrapper}>
+    <TouchableOpacity
+      style={styles.wrapper}
+      onPress={() => navigation.navigate('Category')}>
       <Image source={{uri: category.categoryImage}} style={styles.banner} />
       <View style={styles.titleContainer}>
         <Text style={{...TYPOGRAPHY.text, ...styles.title}}>
           {category.categoryName}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -23,6 +25,7 @@ export default CategoryCard;
 
 type Props = {
   category: Category;
+  navigation: any;
 };
 
 const styles = StyleSheet.create({

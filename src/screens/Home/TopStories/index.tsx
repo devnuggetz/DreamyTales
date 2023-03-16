@@ -2,13 +2,15 @@ import {FlatList, ListRenderItem, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {TYPOGRAPHY} from '../../../common/styles';
 import {TOP_STORIES} from '../../../data';
-import {Story} from '../../../utils/types';
+import {NavigationAsProps, Story} from '../../../utils/types';
 import {COLOURS, SPACING} from '../../../common/theme';
 import TopStoryCard from '../../../components/TopStoryCard';
 
-const TopStories = () => {
+const TopStories = (props: NavigationAsProps) => {
+  const {navigation} = props;
+
   const renderCategory: ListRenderItem<Story> = ({item}) => {
-    return <TopStoryCard storyData={item} />;
+    return <TopStoryCard storyData={item} navigation={navigation} />;
   };
 
   return (
