@@ -4,11 +4,7 @@ import {BORDER_RADIUS, COLOURS, SPACING} from '../../common/theme';
 import {COMMON_STYLES, TYPOGRAPHY} from '../../common/styles';
 import Search from '../../components/Search';
 import Categories from './Categories';
-import {BannerAdSize, TestIds, BannerAd} from 'react-native-google-mobile-ads';
-
-const adUnitId = __DEV__
-  ? TestIds.BANNER
-  : 'ca-app-pub-4599375922819673/2391578594';
+import TopStories from './TopStories';
 
 const Home = () => {
   return (
@@ -28,14 +24,8 @@ const Home = () => {
         />
         <Search />
         <Categories />
+        <TopStories />
       </View>
-      <BannerAd
-        unitId={adUnitId}
-        size={BannerAdSize.FULL_BANNER}
-        requestOptions={{
-          requestNonPersonalizedAdsOnly: true,
-        }}
-      />
     </View>
   );
 };
@@ -57,5 +47,6 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     justifyContent: 'space-between',
+    paddingBottom: SPACING.X_X_LARGE,
   },
 });

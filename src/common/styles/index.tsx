@@ -23,4 +23,8 @@ export const TYPOGRAPHY = StyleSheet.create({
     fontFamily: 'Recoleta-Regular',
     fontSize: 16,
   },
+  title: {
+    fontFamily: 'Recoleta-Regular',
+    fontSize: 18,
+  },
 });
