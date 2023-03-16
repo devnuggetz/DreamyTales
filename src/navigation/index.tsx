@@ -6,6 +6,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import Story from '../screens/Story';
 import Explore from '../screens/Explore';
 import Category from '../screens/Category';
+import AudioPlayer from '../screens/AudioPlayer';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Story" component={Story} />
         <Stack.Screen name="Explore" component={Explore} />
         <Stack.Screen name="Category" component={Category} />
+        <Stack.Screen name="Audio Player" component={AudioPlayer} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,6 +1,6 @@
 import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {BACK_ICON, BOOKMARK_ICON} from '../../../assets/icons';
+import {BACK_ICON} from '../../../assets/icons';
 import {COLOURS} from '../../common/theme';
 
 const Back = (props: Props) => {

@@ -67,7 +67,9 @@ const Story = (props: Props) => {
             Alice in Wonderland Playing Gamess
           </Text>
           <View style={styles.actions}>
-            <ListenStoryButton />
+            <ListenStoryButton
+              onPress={() => navigation.navigate('Audio Player')}
+            />
             <View style={styles.buttons}>
               <View style={{...styles.iconWrapper, ...COMMON_STYLES.center}}>
                 <Bookmarks navigation={() => console.log('')} />

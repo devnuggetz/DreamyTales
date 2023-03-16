@@ -3,7 +3,7 @@ import React from 'react';
 import {COLOURS, SPACING} from '../theme';
 import {COMMON_STYLES} from '../styles/index';
 
-const Layout = (props: any) => {
+const Layout = (props: Props) => {
   const {children} = props;
 
   return (
@@ -11,6 +11,10 @@ const Layout = (props: any) => {
       <ScrollView style={styles.container}>{children}</ScrollView>
     </SafeAreaView>
   );
+};
+
+type Props = {
+  children: any;
 };
 
 export default Layout;

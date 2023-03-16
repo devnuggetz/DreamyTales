@@ -4,13 +4,19 @@ import {PLAY_ICON} from '../../../assets/icons';
 import {BORDER_RADIUS, COLOURS, SPACING} from '../../common/theme';
 import {TYPOGRAPHY} from '../../common/styles';
 
-const ListenStoryButton = () => {
+const ListenStoryButton = (props: Props) => {
+  const {onPress} = props;
+
   return (
-    <TouchableOpacity style={styles.wrapper}>
+    <TouchableOpacity style={styles.wrapper} onPress={onPress}>
       <Image source={PLAY_ICON} style={styles.icon} />
       <Text style={styles.btnTxt}>Listen to this story</Text>
     </TouchableOpacity>
   );
+};
+
+type Props = {
+  onPress: () => void;
 };
 
 export default ListenStoryButton;

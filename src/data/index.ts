@@ -70,7 +70,7 @@ export const DATA: Category[] = [
 export const TOP_STORIES: Story[] = [
   {
     id: 1,
-    title: 'Alice in wonderland',
+    title: 'Alice in wonderland Playing with Me',
     content: 'Hi, this is a story',
     thumbnail:
       'https://cdn.iconscout.com/strapi/illustration_business_ab2f2774b8.png',
@@ -78,6 +78,38 @@ export const TOP_STORIES: Story[] = [
   },
   {
     id: 2,
+    title: 'Alice in wonderland',
+    content: 'Hi, this is a story',
+    thumbnail:
+      'https://cdn.iconscout.com/strapi/illustration_business_ab2f2774b8.png',
+    description: 'This is story',
+  },
+  {
+    id: 3,
+    title: 'Alice in wonderland',
+    content: 'Hi, this is a story',
+    thumbnail:
+      'https://cdn.iconscout.com/strapi/illustration_business_ab2f2774b8.png',
+    description: 'This is story',
+  },
+  {
+    id: 4,
+    title: 'Alice in wonderland',
+    content: 'Hi, this is a story',
+    thumbnail:
+      'https://cdn.iconscout.com/strapi/illustration_business_ab2f2774b8.png',
+    description: 'This is story',
+  },
+  {
+    id: 5,
+    title: 'Alice in wonderland',
+    content: 'Hi, this is a story',
+    thumbnail:
+      'https://cdn.iconscout.com/strapi/illustration_business_ab2f2774b8.png',
+    description: 'This is story',
+  },
+  {
+    id: 6,
     title: 'Alice in wonderland',
     content: 'Hi, this is a story',
     thumbnail:
