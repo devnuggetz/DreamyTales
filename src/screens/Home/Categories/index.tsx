@@ -1,12 +1,14 @@
 import {FlatList, ListRenderItem, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {TYPOGRAPHY} from '../../../common/styles';
-import {DATA} from '../../../data';
 import CategoryCard from '../../../components/CategoryCard';
 import {Category} from '../../../utils/types';
 import {COLOURS, SPACING} from '../../../common/theme';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../redux/store';
 
 const Categories = (props: Props) => {
+  const {allCategories} = useSelector((state: RootState) => state.global);
   const {navigation} = props;
 
   const renderCategory: ListRenderItem<Category> = ({item}) => {
@@ -17,7 +19,7 @@ const Categories = (props: Props) => {
     <View>
       <Text style={styles.heading}>Categories</Text>
       <FlatList
-        data={DATA}
+        data={allCategories}
         renderItem={renderCategory}
         horizontal={true}
         ItemSeparatorComponent={() => <View style={{width: 12}} />}

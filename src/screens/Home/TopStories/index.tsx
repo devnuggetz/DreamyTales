@@ -5,9 +5,13 @@ import {TOP_STORIES} from '../../../data';
 import {NavigationAsProps, Story} from '../../../utils/types';
 import {COLOURS, SPACING} from '../../../common/theme';
 import TopStoryCard from '../../../components/TopStoryCard';
+import {RootState} from '../../../redux/store';
+import {useSelector} from 'react-redux';
 
 const TopStories = (props: NavigationAsProps) => {
   const {navigation} = props;
+
+  const {topStories} = useSelector((state: RootState) => state.global);
 
   const renderCategory: ListRenderItem<Story> = ({item}) => {
     return <TopStoryCard storyData={item} navigation={navigation} />;
@@ -17,7 +21,7 @@ const TopStories = (props: NavigationAsProps) => {
     <View style={styles.wrapper}>
       <Text style={styles.heading}>Top Stories</Text>
       <FlatList
-        data={TOP_STORIES}
+        data={topStories}
         renderItem={renderCategory}
         horizontal={true}
         ItemSeparatorComponent={() => <View style={{width: 12}} />}

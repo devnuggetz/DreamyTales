@@ -1,7 +1,7 @@
 export type Category = {
   id: number;
   categoryName: string;
-  categoryImage: string;
+  thumbnail: string;
   stories: Story[];
 };
 
