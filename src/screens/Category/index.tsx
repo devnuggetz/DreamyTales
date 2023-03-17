@@ -28,7 +28,7 @@ const Category = ({navigation, route}) => {
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.wrapper}>
         <Search allowSearch={false} navigation={navigation} />
-        <Text style={styles.heading}>Fairy Tale Stories</Text>
+        <Text style={styles.heading}>{categoryData.categoryName}</Text>
         <View style={styles.storiesWrapper}>
           <FlatList
             renderItem={renderStory}

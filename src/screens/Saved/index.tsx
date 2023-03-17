@@ -10,7 +10,6 @@ import React from 'react';
 import Search from '../../components/Search';
 import {COLOURS, SPACING} from '../../common/theme';
 import {TYPOGRAPHY} from '../../common/styles';
-import {TOP_STORIES} from '../../data';
 import {Story} from '../../utils/types';
 import StoryCard from '../../components/StoryCard';
 import {RootState} from '../../redux/store';

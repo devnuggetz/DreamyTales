@@ -6,19 +6,23 @@ import {SEARCH_ICON} from '../../../assets/icons';
 import {NavigationAsProps} from '../../utils/types';
 
 const Search = (props: Props) => {
-  const {allowSearch, navigation} = props;
+  const {allowSearch, navigation, ref} = props;
 
   return (
     <View style={styles.wrapper}>
       <Image source={SEARCH_ICON} style={styles.search_icon} />
 
       {allowSearch ? (
-        <TextInput style={styles.input} placeholder="Search your story" />
+        <TextInput
+          style={styles.input}
+          placeholder="Search any story or category"
+        />
       ) : (
         <Text
           style={styles.placeholderText}
-          onPress={() => navigation.navigate('Explore')}>
-          Search your story
+          onPress={() => navigation.navigate('Explore')}
+          ref={ref}>
+          Search any story or category
         </Text>
       )}
     </View>
@@ -27,6 +31,7 @@ const Search = (props: Props) => {
 
 type Props = {
   allowSearch?: boolean;
+  ref?: any;
 } & NavigationAsProps;
 
 export default Search;

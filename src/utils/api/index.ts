@@ -31,6 +31,7 @@ export const getInitialGlobalData = async () => {
     bookmarkedStories: bookmarkedStories,
     homeBannerUrl: homeBanner,
     forceUpdateAvailable,
+    allStories: storyData,
   };
 };
 

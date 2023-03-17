@@ -10,4 +10,5 @@ export type GlobalInitialState = {
     isForceUpdateAvailable: boolean;
     homeBannerUrl: string;
   };
+  allStories: Story[];
 };

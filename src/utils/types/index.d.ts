@@ -11,8 +11,8 @@ export type Story = {
   thumbnail: string;
   description: string;
   content: string;
-  tags?: string[];
   audioFile?: string;
+  categories: string[];
 };
 
 export type NavigationAsProps = {

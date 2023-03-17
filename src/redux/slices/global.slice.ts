@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {getInitialGlobalData} from '../../utils/api';
-import {addStoryToBookmarks, toggleStoryToBookmarks} from '../../utils/helper';
+import {toggleStoryToBookmarks} from '../../utils/helper';
 import {Story} from '../../utils/types';
 import {globalInitialState} from '../initialState/globalInitialState';
 
@@ -44,6 +44,7 @@ const globalSlice = createSlice({
         state.allCategories = action.payload.allCategories;
         state.bookmarkedStories = action.payload.bookmarkedStories;
         state.topStories = action.payload.topStories;
+        state.allStories = action.payload.allStories;
         state.appConfig = {
           homeBannerUrl: action.payload.homeBannerUrl,
           isForceUpdateAvailable: action.payload.forceUpdateAvailable,

@@ -7,23 +7,28 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import Share from 'react-native-share';
 import React from 'react';
 import {BORDER_RADIUS, COLOURS, SPACING} from '../../common/theme';
 
 import {COMMON_STYLES, TYPOGRAPHY} from '../../common/styles/index';
-import ListenStoryButton from '../../components/ListenStoryButton';
 
 import Markdown from 'react-native-markdown-display';
 import {MARKDOWN_STYLES} from '../../utils/constants/markdown.style';
 import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
-import Share from '../../components/Share';
+
 import Back from '../../components/Back';
 import {NavigationAsProps} from '../../utils/types';
 import {useAppDispatch} from '../../utils/hooks/index';
 import {toggleStoryToBookmark} from '../../redux/slices/global.slice';
-import {BOOKMARK_ICON, BOOKSMARK_ICON_FILLED} from '../../../assets/icons';
+import {
+  BOOKMARK_ICON,
+  BOOKSMARK_ICON_FILLED,
+  SHARE_ICON,
+} from '../../../assets/icons';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
+import {APP_PLAY_STORE_LINK} from '../../utils/constants';
 
 const adUnitId = __DEV__
   ? TestIds.BANNER
@@ -37,6 +42,17 @@ const Story = (props: Props) => {
   const {storyData} = route.params;
 
   const dispatch = useAppDispatch();
+
+  const shareStory = async () => {
+    const message = `Discover the magic of DreamyTales! ✨ I'm loving this captivating story ${storyData.title} and couldn't resist sharing. Click the link, explore, and let your imagination soar: ${APP_PLAY_STORE_LINK} 📚🚀`;
+
+    const shareOptions = {
+      message,
+      title: storyData.title,
+    };
+
+    Share.open(shareOptions);
+  };
 
   const getBookmarkIcon = () => {
     if (!bookmarkedStories.some(bookmark => bookmark.id === storyData.id)) {
@@ -72,18 +88,20 @@ const Story = (props: Props) => {
             {storyData.title}
           </Text>
           <View style={styles.actions}>
-            <ListenStoryButton
+            {/* <ListenStoryButton
               onPress={() => navigation.navigate('Audio Player')}
-            />
+            /> */}
             <View style={styles.buttons}>
               <TouchableOpacity
                 style={{...styles.iconWrapper, ...COMMON_STYLES.center}}
                 onPress={() => dispatch(toggleStoryToBookmark(storyData))}>
                 <Image source={getBookmarkIcon()} style={styles.icon} />
               </TouchableOpacity>
-              <View style={{...styles.iconWrapper, ...COMMON_STYLES.center}}>
-                <Share navigation={() => console.log('')} />
-              </View>
+              <TouchableOpacity
+                style={{...styles.iconWrapper, ...COMMON_STYLES.center}}
+                onPress={shareStory}>
+                <Image source={SHARE_ICON} style={styles.icon} />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -157,5 +175,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingTop: SPACING.MEDIUM,
   },
 });
