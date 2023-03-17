@@ -13,7 +13,10 @@ import {initialDataFetch} from '../../redux/slices/global.slice';
 import {useAppDispatch} from '../../utils/hooks';
 
 const Home = ({navigation}: Props) => {
-  const {allCategories} = useSelector((state: RootState) => state.global);
+  const {
+    allCategories,
+    appConfig: {homeBannerUrl},
+  } = useSelector((state: RootState) => state.global);
 
   const dispatch = useAppDispatch();
 
@@ -38,7 +41,7 @@ const Home = ({navigation}: Props) => {
           </View>
           <Image
             source={{
-              uri: 'https://cdni.iconscout.com/illustration/premium/thumb/boy-watching-through-telescope-5982672-4972891.png',
+              uri: homeBannerUrl,
             }}
             style={styles.banner}
           />
@@ -63,7 +66,7 @@ const styles = StyleSheet.create({
     ...TYPOGRAPHY.heading,
   },
   banner: {
-    height: 180,
+    height: 200,
     borderRadius: BORDER_RADIUS.MEDIUM,
     resizeMode: 'contain',
   },

@@ -2,23 +2,26 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   SafeAreaView,
   FlatList,
   ListRenderItem,
 } from 'react-native';
 import React from 'react';
-import Layout from '../../common/Layout';
+
 import Search from '../../components/Search';
-import Back from '../../components/Back';
-import Categories from '../Home/Categories';
+
 import {COLOURS, SPACING} from '../../common/theme';
 import {TYPOGRAPHY} from '../../common/styles';
-import {TOP_STORIES} from '../../data';
 import {Story} from '../../utils/types';
 import StoryCard from '../../components/StoryCard';
 
-const Category = ({navigation}) => {
+const Category = ({navigation, route}) => {
+  const {categoryData} = route.params;
+
+  const {stories} = categoryData;
+
+  console.log(categoryData, 'hehhe');
+
   const renderStory: ListRenderItem<Story> = ({item}) => {
     return <StoryCard storyData={item} navigation={navigation} />;
   };
@@ -31,7 +34,7 @@ const Category = ({navigation}) => {
         <View style={styles.storiesWrapper}>
           <FlatList
             renderItem={renderStory}
-            data={TOP_STORIES}
+            data={stories}
             showsVerticalScrollIndicator={false}
           />
         </View>

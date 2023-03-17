@@ -10,7 +10,7 @@ const CategoryCard = (props: Props) => {
   return (
     <TouchableOpacity
       style={styles.wrapper}
-      onPress={() => navigation.navigate('Category')}>
+      onPress={() => navigation.navigate('Category', {categoryData: category})}>
       <Image source={{uri: category.thumbnail}} style={styles.banner} />
       <View style={styles.titleContainer}>
         <Text style={{...TYPOGRAPHY.text, ...styles.title}}>

@@ -17,4 +17,5 @@ export type Story = {
 
 export type NavigationAsProps = {
   navigation: any;
+  route?: any;
 };

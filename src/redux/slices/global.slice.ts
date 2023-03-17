@@ -27,6 +27,10 @@ const globalSlice = createSlice({
         state.allCategories = action.payload.allCategories;
         state.bookmarkedStories = action.payload.bookmarkedStories;
         state.topStories = action.payload.topStories;
+        state.appConfig = {
+          homeBannerUrl: action.payload.homeBannerUrl,
+          isForceUpdateAvailable: action.payload.forceUpdateAvailable,
+        };
       })
       .addCase(initialDataFetch.rejected, state => {
         console.log('HERE', 5);

@@ -10,7 +10,7 @@ const TopStoryCard = (props: Props) => {
   return (
     <TouchableOpacity
       style={styles.wrapper}
-      onPress={() => navigation.navigate('Story')}>
+      onPress={() => navigation.navigate('Story', {storyData})}>
       <Image source={{uri: storyData.thumbnail}} style={styles.thumbnail} />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{storyData.title}</Text>
