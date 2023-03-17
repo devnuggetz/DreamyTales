@@ -20,8 +20,6 @@ const Category = ({navigation, route}) => {
 
   const {stories} = categoryData;
 
-  console.log(categoryData, 'hehhe');
-
   const renderStory: ListRenderItem<Story> = ({item}) => {
     return <StoryCard storyData={item} navigation={navigation} />;
   };

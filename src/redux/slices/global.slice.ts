@@ -1,5 +1,7 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {getInitialGlobalData} from '../../utils/api';
+import {addStoryToBookmarks, toggleStoryToBookmarks} from '../../utils/helper';
+import {Story} from '../../utils/types';
 import {globalInitialState} from '../initialState/globalInitialState';
 
 export const initialDataFetch = createAsyncThunk(
@@ -14,15 +16,30 @@ export const initialDataFetch = createAsyncThunk(
 const globalSlice = createSlice({
   name: 'global',
   initialState: globalInitialState,
-  reducers: {},
+  reducers: {
+    toggleStoryToBookmark: (state, action: PayloadAction<Story>) => {
+      const story = action.payload;
+      toggleStoryToBookmarks(story);
+
+      const storyIndex = state.bookmarkedStories.findIndex(
+        bookmark => bookmark.id === story.id,
+      );
+
+      if (storyIndex !== -1) {
+        // Remove the story from bookmarks
+        state.bookmarkedStories.splice(storyIndex, 1);
+      } else {
+        // Add the story to bookmarks
+        state.bookmarkedStories.push(story);
+      }
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(initialDataFetch.pending, state => {
-        console.log('HERE');
         state.isLoading = true;
       })
       .addCase(initialDataFetch.fulfilled, (state, action: any) => {
-        console.log('HERE', 2);
         state.isLoading = false;
         state.allCategories = action.payload.allCategories;
         state.bookmarkedStories = action.payload.bookmarkedStories;
@@ -33,10 +50,11 @@ const globalSlice = createSlice({
         };
       })
       .addCase(initialDataFetch.rejected, state => {
-        console.log('HERE', 5);
         state.isError = true;
       });
   },
 });
+
+export const {toggleStoryToBookmark} = globalSlice.actions;
 
 export default globalSlice.reducer;

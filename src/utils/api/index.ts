@@ -1,13 +1,17 @@
 import firestore from '@react-native-firebase/firestore';
 import {chacheDatainAsync, checkIfDataCached, shuffleArray} from '../helper';
 import RemoteConfig from '@react-native-firebase/remote-config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Story} from '../types';
 
 export const getInitialGlobalData = async () => {
-  const [categoryData, storyData, remoteConfig] = await Promise.all([
-    getCategoryData(),
-    getStoryData(),
-    fetchRemoteData(),
-  ]);
+  const [categoryData, storyData, remoteConfig, bookmarkedStories] =
+    await Promise.all([
+      getCategoryData(),
+      getStoryData(),
+      fetchRemoteData(),
+      getBookmarkedStories(),
+    ]);
 
   const {
     forceUpdateAvailable,
@@ -24,10 +28,23 @@ export const getInitialGlobalData = async () => {
   return {
     topStories: shuffleArray(topStories),
     allCategories: shuffleArray(formattedCategoriesData),
-    bookmarkedStories: [],
+    bookmarkedStories: bookmarkedStories,
     homeBannerUrl: homeBanner,
     forceUpdateAvailable,
   };
+};
+
+const getBookmarkedStories = async () => {
+  try {
+    const bookmarksKey = 'bookmarks';
+    const storedData = await AsyncStorage.getItem(bookmarksKey);
+    let bookMarks: Story[] = storedData ? JSON.parse(storedData) : [];
+
+    return bookMarks;
+  } catch (error) {
+    console.error('Error adding story to bookmarks:', error);
+    return [];
+  }
 };
 
 const fetchRemoteData = async () => {
@@ -86,8 +103,6 @@ const getCategoryData = async () => {
     .collection('Category')
     .get()
     .then(querySnapshot => {
-      console.log('Total users: ', querySnapshot.size);
-
       querySnapshot.forEach(documentSnapshot => {
         const _cat = {
           id: documentSnapshot.id,
@@ -106,11 +121,9 @@ const getStoryData = async () => {
   const cachedStoryData = await checkIfDataCached('allStories');
 
   if (cachedStoryData) {
-    console.log('cached story data');
     return cachedStoryData;
   }
 
-  console.log('Article called');
   const story: any[] = [];
   await firestore()
     .collection('Story')

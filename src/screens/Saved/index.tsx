@@ -13,8 +13,12 @@ import {TYPOGRAPHY} from '../../common/styles';
 import {TOP_STORIES} from '../../data';
 import {Story} from '../../utils/types';
 import StoryCard from '../../components/StoryCard';
+import {RootState} from '../../redux/store';
+import {useSelector} from 'react-redux';
 
 const Saved = ({navigation}) => {
+  const {bookmarkedStories} = useSelector((state: RootState) => state.global);
+
   const renderStory: ListRenderItem<Story> = ({item}) => {
     return <StoryCard storyData={item} navigation={navigation} />;
   };
@@ -27,7 +31,7 @@ const Saved = ({navigation}) => {
         <View style={styles.storiesWrapper}>
           <FlatList
             renderItem={renderStory}
-            data={TOP_STORIES}
+            data={bookmarkedStories}
             showsVerticalScrollIndicator={false}
           />
         </View>

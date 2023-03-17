@@ -5,11 +5,11 @@ import {
   View,
   SafeAreaView,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 import {BORDER_RADIUS, COLOURS, SPACING} from '../../common/theme';
 
-import Bookmarks from '../../components/Bookmarks';
 import {COMMON_STYLES, TYPOGRAPHY} from '../../common/styles/index';
 import ListenStoryButton from '../../components/ListenStoryButton';
 
@@ -19,6 +19,11 @@ import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
 import Share from '../../components/Share';
 import Back from '../../components/Back';
 import {NavigationAsProps} from '../../utils/types';
+import {useAppDispatch} from '../../utils/hooks/index';
+import {toggleStoryToBookmark} from '../../redux/slices/global.slice';
+import {BOOKMARK_ICON, BOOKSMARK_ICON_FILLED} from '../../../assets/icons';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../redux/store';
 
 const adUnitId = __DEV__
   ? TestIds.BANNER
@@ -27,7 +32,18 @@ const adUnitId = __DEV__
 const Story = (props: Props) => {
   const {navigation, route} = props;
 
+  const {bookmarkedStories} = useSelector((state: RootState) => state.global);
+
   const {storyData} = route.params;
+
+  const dispatch = useAppDispatch();
+
+  const getBookmarkIcon = () => {
+    if (!bookmarkedStories.some(bookmark => bookmark.id === storyData.id)) {
+      return BOOKMARK_ICON;
+    }
+    return BOOKSMARK_ICON_FILLED;
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -60,9 +76,11 @@ const Story = (props: Props) => {
               onPress={() => navigation.navigate('Audio Player')}
             />
             <View style={styles.buttons}>
-              <View style={{...styles.iconWrapper, ...COMMON_STYLES.center}}>
-                <Bookmarks navigation={() => console.log('')} />
-              </View>
+              <TouchableOpacity
+                style={{...styles.iconWrapper, ...COMMON_STYLES.center}}
+                onPress={() => dispatch(toggleStoryToBookmark(storyData))}>
+                <Image source={getBookmarkIcon()} style={styles.icon} />
+              </TouchableOpacity>
               <View style={{...styles.iconWrapper, ...COMMON_STYLES.center}}>
                 <Share navigation={() => console.log('')} />
               </View>
@@ -94,6 +112,11 @@ const styles = StyleSheet.create({
     zIndex: 100,
     height: 36,
     width: 36,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    tintColor: COLOURS.BLACK,
   },
   buttons: {
     flexDirection: 'row',
