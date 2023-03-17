@@ -10,10 +10,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-firebase/app": "^17.3.2",
+    "@react-native-firebase/firestore": "^17.3.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@reduxjs/toolkit": "^1.9.3",
-    "firebase": "^9.18.0",
     "react": "18.2.0",
     "react-native": "0.71.4",
     "react-native-gesture-handler": "^2.9.0",

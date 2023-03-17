@@ -23,10 +23,10 @@ const globalSlice = createSlice({
       })
       .addCase(initialDataFetch.fulfilled, (state, action: any) => {
         console.log('HERE', 2);
-        state.isLoading = false;
-        state.allCategories = action.payload.allCategories;
-        state.bookmarkedStories = action.payload.bookmarkedStories;
-        state.topStories = action.payload.topStories;
+        // state.isLoading = false;
+        // state.allCategories = action.payload.allCategories;
+        // state.bookmarkedStories = action.payload.bookmarkedStories;
+        // state.topStories = action.payload.topStories;
       })
       .addCase(initialDataFetch.rejected, state => {
         console.log('HERE', 5);
