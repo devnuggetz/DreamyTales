@@ -6,8 +6,6 @@ import {COLOURS} from '../../common/theme';
 const Bookmarks = (props: Props) => {
   const {navigation} = props;
 
-  console.log(navigation);
-
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Saved')}>
       <Image source={BOOKMARK_ICON} style={styles.icon} />

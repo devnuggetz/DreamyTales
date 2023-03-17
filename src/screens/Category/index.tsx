@@ -25,11 +25,17 @@ const Category = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <ScrollView style={styles.wrapper}>
+      <View style={styles.wrapper}>
         <Search allowSearch={false} navigation={navigation} />
         <Text style={styles.heading}>Fairy Tale Stories</Text>
-        <View style={styles.storiesWrapper}></View>
-      </ScrollView>
+        <View style={styles.storiesWrapper}>
+          <FlatList
+            renderItem={renderStory}
+            data={TOP_STORIES}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -38,7 +44,7 @@ export default Category;
 
 const styles = StyleSheet.create({
   storiesWrapper: {
-    paddingBottom: SPACING.X_X_LARGE * 2,
+    paddingBottom: SPACING.X_X_LARGE * 3,
   },
 
   heading: {

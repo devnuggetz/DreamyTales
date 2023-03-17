@@ -1,5 +1,5 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BORDER_RADIUS, COLOURS, SPACING} from '../../common/theme';
 import {COMMON_STYLES, TYPOGRAPHY} from '../../common/styles';
 import Search from '../../components/Search';
@@ -7,9 +7,27 @@ import Categories from './Categories';
 import TopStories from './TopStories';
 import Bookmarks from '../../components/Bookmarks';
 import Layout from '../../common/Layout';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../redux/store';
+import {initialDataFetch} from '../../redux/slices/global.slice';
+import {useAppDispatch} from '../../utils/hooks';
 
 const Home = ({navigation}: Props) => {
-  console.log(navigation);
+  const {allCategories, bookmarkedStories, topStories} = useSelector(
+    (state: RootState) => state.global,
+  );
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (allCategories.length <= 0) {
+      test();
+    }
+  }, []);
+
+  const test = () => {
+    dispatch(initialDataFetch());
+  };
   return (
     <Layout>
       <View style={{...COMMON_STYLES.full_flex, ...styles.wrapper}}>
