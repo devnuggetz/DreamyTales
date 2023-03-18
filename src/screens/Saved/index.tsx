@@ -19,7 +19,12 @@ const Saved = ({navigation}) => {
   const {bookmarkedStories} = useSelector((state: RootState) => state.global);
 
   const renderStory: ListRenderItem<Story> = ({item}) => {
-    return <StoryCard storyData={item} navigation={navigation} />;
+    return (
+      <StoryCard
+        storyData={item}
+        onCardClick={() => navigation.navigate('Story', {storyData: item})}
+      />
+    );
   };
 
   return (

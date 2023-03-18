@@ -45,7 +45,12 @@ const Explore = ({navigation}) => {
   };
 
   const renderStory: ListRenderItem<Story> = ({item}) => {
-    return <StoryCard storyData={item} navigation={navigation} />;
+    return (
+      <StoryCard
+        storyData={item}
+        onCardClick={() => navigation.navigate('Story', {storyData: item})}
+      />
+    );
   };
 
   return (

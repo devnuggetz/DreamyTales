@@ -1,16 +1,14 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {NavigationAsProps, Story} from '../../utils/types';
+import {Story} from '../../utils/types';
 import {BORDER_RADIUS, COLOURS, SPACING} from '../../common/theme';
 import {TYPOGRAPHY} from '../../common/styles';
 
 const StoryCard = (props: Props) => {
-  const {storyData, navigation} = props;
+  const {storyData, onCardClick} = props;
 
   return (
-    <TouchableOpacity
-      style={styles.wrapper}
-      onPress={() => navigation.navigate('Story', {storyData})}>
+    <TouchableOpacity style={styles.wrapper} onPress={onCardClick}>
       <Image source={{uri: storyData.thumbnail}} style={styles.banner} />
       <View style={styles.info}>
         <View style={styles.titleContainer}>
@@ -26,7 +24,8 @@ const StoryCard = (props: Props) => {
 
 type Props = {
   storyData: Story;
-} & NavigationAsProps;
+  onCardClick: () => void;
+};
 
 export default StoryCard;
 

@@ -1,9 +1,11 @@
 import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
+import adsSlice from '../slices/ads.slice';
 import globalSlice from '../slices/global.slice';
 
 const store = configureStore({
   reducer: {
     global: globalSlice,
+    ads: adsSlice,
   },
 });
 
