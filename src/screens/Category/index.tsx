@@ -92,6 +92,7 @@ const Category = ({navigation, route}) => {
               <StoryCard
                 storyData={item}
                 onCardClick={() => handleStoryClick(item)}
+                key={item.id}
               />
             ))}
         </View>

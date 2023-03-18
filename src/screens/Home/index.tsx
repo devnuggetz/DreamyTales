@@ -34,7 +34,7 @@ const Home = ({navigation}: Props) => {
             <View style={{...styles.headingContainer}}>
               <Text style={{...styles.heading}}>DreamyTales</Text>
               <Text style={{...TYPOGRAPHY.subHeading}}>
-                What will you listen today?
+                Unlock the Magic of Stories ✨
               </Text>
             </View>
             <Bookmarks navigation={navigation} />

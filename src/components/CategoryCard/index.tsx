@@ -5,13 +5,21 @@ import {BORDER_RADIUS, COLOURS, SPACING} from '../../common/theme';
 import {TYPOGRAPHY} from '../../common/styles';
 
 const CategoryCard = (props: Props) => {
-  const {category, navigation} = props;
+  const {
+    category,
+    navigation,
+    wrapperStyle,
+    bannerStyle = {height: 150, width: 125},
+  } = props;
 
   return (
     <TouchableOpacity
-      style={styles.wrapper}
+      style={{...styles.wrapper, ...wrapperStyle}}
       onPress={() => navigation.navigate('Category', {categoryData: category})}>
-      <Image source={{uri: category.thumbnail}} style={styles.banner} />
+      <Image
+        source={{uri: category.thumbnail}}
+        style={{...styles.banner, ...bannerStyle}}
+      />
       <View style={styles.titleContainer}>
         <Text style={{...TYPOGRAPHY.text, ...styles.title}}>
           {category.categoryName}
@@ -26,6 +34,8 @@ export default CategoryCard;
 type Props = {
   category: Category;
   navigation: any;
+  wrapperStyle: any;
+  bannerStyle?: any;
 };
 
 const styles = StyleSheet.create({
@@ -35,10 +45,8 @@ const styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS.MEDIUM,
   },
   banner: {
-    height: 150,
-    width: 125,
-    resizeMode: 'cover',
     borderRadius: BORDER_RADIUS.MEDIUM,
+    resizeMode: 'cover',
   },
   title: {
     bottom: 0,

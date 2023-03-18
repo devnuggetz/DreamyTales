@@ -7,6 +7,7 @@ import Story from '../screens/Story';
 import Explore from '../screens/Explore';
 import Category from '../screens/Category';
 import AudioPlayer from '../screens/AudioPlayer';
+import AllCategories from '../screens/AllCategories';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Explore" component={Explore} />
         <Stack.Screen name="Category" component={Category} />
         <Stack.Screen name="Audio Player" component={AudioPlayer} />
+        <Stack.Screen name="All Categories" component={AllCategories} />
       </Stack.Navigator>
     </NavigationContainer>
   );

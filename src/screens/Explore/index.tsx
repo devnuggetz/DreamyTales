@@ -7,7 +7,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 
 import {BORDER_RADIUS, COLOURS, SPACING} from '../../common/theme';
 import {SEARCH_ICON} from '../../../assets/icons';
@@ -71,16 +71,24 @@ const Explore = ({navigation}) => {
     }
   };
 
-  const handleSearchInput = (_search: string) => {
-    setSearch(_search);
-    setData(
-      allStories.filter(
-        (story: Story) =>
-          story.title.toLowerCase().includes(search.toLowerCase()) ||
-          story.categories.some(item => item.includes(search)),
-      ),
-    );
-  };
+  const handleSearchInput = useCallback(
+    (_search: string) => {
+      setSearch(_search);
+      const timeoutId = setTimeout(() => {
+        setData(
+          allStories.filter(
+            (story: Story) =>
+              story.title.toLowerCase().includes(_search.toLowerCase()) ||
+              story.categories.some(item =>
+                item.toLowerCase().includes(_search.toLowerCase()),
+              ),
+          ),
+        );
+      }, 500);
+      return () => clearTimeout(timeoutId);
+    },
+    [allStories],
+  );
 
   const renderStory: ListRenderItem<Story> = ({item}) => {
     return (
@@ -107,6 +115,7 @@ const Explore = ({navigation}) => {
           renderItem={renderStory}
           data={data}
           showsVerticalScrollIndicator={false}
+          keyExtractor={item => item.id.toString()}
         />
       </View>
     </SafeAreaView>
