@@ -32,7 +32,7 @@ export default StoryCard;
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: COLOURS.WHITE,
-    marginVertical: SPACING.SMALL,
+    marginBottom: SPACING.SMALL,
     borderRadius: BORDER_RADIUS.MEDIUM,
     padding: SPACING.SMALL,
   },

@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   FlatList,
   ListRenderItem,
+  ScrollView,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 
@@ -15,9 +16,8 @@ import {TYPOGRAPHY} from '../../common/styles';
 import {Story} from '../../utils/types';
 import StoryCard from '../../components/StoryCard';
 import {
-  AdEventType,
-  InterstitialAd,
-  TestIds,
+  BannerAd,
+  BannerAdSize,
   useInterstitialAd,
 } from 'react-native-google-mobile-ads';
 import {RootState} from '../../redux/store';
@@ -29,21 +29,23 @@ const adUnitId = __DEV__
   ? 'ca-app-pub-3940256099942544/1033173712'
   : 'ca-app-pub-4599375922819673/7106355825';
 
+const bannerAdId = __DEV__
+  ? 'ca-app-pub-3940256099942544/6300978111'
+  : 'ca-app-pub-4599375922819673/6739260986';
+
 const Category = ({navigation, route}) => {
   const {interstitialCount} = useSelector((state: RootState) => state.ads);
   const dispatch = useAppDispatch();
+  const {isLoaded, isClosed, load, show} = useInterstitialAd(adUnitId);
+
   const [selectStory, setSelectStory] = useState<Story>();
 
   const {categoryData} = route.params;
 
   const {stories} = categoryData;
 
-  const {isLoaded, isClosed, load, show} = useInterstitialAd(adUnitId, {
-    requestNonPersonalizedAdsOnly: true,
-  });
-
   useEffect(() => {
-    if (interstitialCount % 3 === 0) {
+    if (interstitialCount % 3 === 1) {
       console.log('Load called', interstitialCount);
       load();
     }
@@ -69,24 +71,39 @@ const Category = ({navigation, route}) => {
     }
   };
 
-  const renderStory: ListRenderItem<Story> = ({item}) => {
-    return (
-      <StoryCard storyData={item} onCardClick={() => handleStoryClick(item)} />
-    );
-  };
-
   return (
     <SafeAreaView style={styles.wrapper}>
-      <View style={styles.wrapper}>
-        <Search allowSearch={false} navigation={navigation} />
+      <ScrollView
+        style={styles.wrapper}
+        showsVerticalScrollIndicator={false}
+        stickyHeaderIndices={[0]}>
+        <View style={styles.searchWrapper}>
+          <Search allowSearch={false} navigation={navigation} />
+        </View>
         <Text style={styles.heading}>{categoryData.categoryName}</Text>
         <View style={styles.storiesWrapper}>
-          <FlatList
+          {/* <FlatList
             renderItem={renderStory}
             data={stories}
             showsVerticalScrollIndicator={false}
-          />
+          /> */}
+          {stories.length > 0 &&
+            stories.map(item => (
+              <StoryCard
+                storyData={item}
+                onCardClick={() => handleStoryClick(item)}
+              />
+            ))}
         </View>
+      </ScrollView>
+      <View style={styles.adWrapper}>
+        <BannerAd
+          unitId={bannerAdId}
+          size={BannerAdSize.BANNER}
+          requestOptions={{
+            requestNonPersonalizedAdsOnly: true,
+          }}
+        />
       </View>
     </SafeAreaView>
   );
@@ -96,7 +113,8 @@ export default Category;
 
 const styles = StyleSheet.create({
   storiesWrapper: {
-    paddingBottom: SPACING.X_X_LARGE * 3,
+    paddingBottom: SPACING.X_X_LARGE,
+    position: 'relative',
   },
 
   heading: {
@@ -109,5 +127,20 @@ const styles = StyleSheet.create({
     paddingBottom: SPACING.X_X_LARGE,
     backgroundColor: COLOURS.BACKGROUND,
     paddingHorizontal: SPACING.SMALL,
+  },
+
+  adWrapper: {
+    paddingVertical: SPACING.SMALL,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: COLOURS.BACKGROUND,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  searchWrapper: {
+    backgroundColor: COLOURS.BACKGROUND,
   },
 });

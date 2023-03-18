@@ -7,8 +7,9 @@ export type GlobalInitialState = {
   topStories: Story[];
   bookmarkedStories: Story[];
   appConfig: {
-    isForceUpdateAvailable: boolean;
+    forceUpdateVersion: number;
     homeBannerUrl: string;
+    currentAppVersion: number;
   };
   allStories: Story[];
 };

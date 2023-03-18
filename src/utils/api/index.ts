@@ -14,8 +14,9 @@ export const getInitialGlobalData = async () => {
     ]);
 
   const {
-    forceUpdateAvailable,
+    forceUpdateVersion,
     homePageConfig: {homeBanner},
+    currentAppVersion,
   } = remoteConfig;
 
   const topStories = getTopStories(storyData);
@@ -30,8 +31,9 @@ export const getInitialGlobalData = async () => {
     allCategories: shuffleArray(formattedCategoriesData),
     bookmarkedStories: bookmarkedStories,
     homeBannerUrl: homeBanner,
-    forceUpdateAvailable,
-    allStories: storyData,
+    forceUpdateVersion,
+    currentAppVersion,
+    allStories: shuffleArray(storyData),
   };
 };
 
@@ -50,7 +52,8 @@ const getBookmarkedStories = async () => {
 
 const fetchRemoteData = async () => {
   const defaultConfig = {
-    forceUpdateAvailable: false,
+    forceUpdateVersion: 0,
+    currentAppVersion: 0,
     homePageConfig: {
       homeBanner: JSON.stringify({
         homeBanner:
@@ -65,21 +68,26 @@ const fetchRemoteData = async () => {
   await RemoteConfig().fetchAndActivate();
 
   // Access the values
-  const forceUpdateAvailable = RemoteConfig()
-    .getValue('forceUpdateAvailable')
-    .asBoolean();
+  const forceUpdateVersion = RemoteConfig()
+    .getValue('forceUpdateVersion')
+    .asNumber();
+  const currentAppVersion = RemoteConfig()
+    .getValue('currentAppVersion')
+    .asNumber();
   const homePageConfig = JSON.parse(
     RemoteConfig().getValue('homePageConfig').asString(),
   );
 
-  return {forceUpdateAvailable, homePageConfig};
+  return {forceUpdateVersion, homePageConfig, currentAppVersion};
 };
 
 const getFormattedCategoryData = (categoryData, storyData) => {
   return categoryData.map(category => {
     return {
       ...category,
-      stories: getStoriesByCategory(category.categoryName, storyData),
+      stories: shuffleArray(
+        getStoriesByCategory(category.categoryName, storyData),
+      ),
     };
   });
 };

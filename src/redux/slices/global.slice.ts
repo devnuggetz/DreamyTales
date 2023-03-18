@@ -47,7 +47,8 @@ const globalSlice = createSlice({
         state.allStories = action.payload.allStories;
         state.appConfig = {
           homeBannerUrl: action.payload.homeBannerUrl,
-          isForceUpdateAvailable: action.payload.forceUpdateAvailable,
+          forceUpdateVersion: action.payload.forceUpdateVersion,
+          currentAppVersion: action.payload.currentAppVersion,
         };
       })
       .addCase(initialDataFetch.rejected, state => {

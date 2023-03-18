@@ -16,11 +16,23 @@ import {Story} from '../../utils/types';
 import StoryCard from '../../components/StoryCard';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
+import {useAppDispatch} from '../../utils/hooks';
+import {useInterstitialAd} from 'react-native-google-mobile-ads';
+import {incrementInitialState} from '../../redux/slices/ads.slice';
+
+const adUnitId = __DEV__
+  ? 'ca-app-pub-3940256099942544/1033173712'
+  : 'ca-app-pub-4599375922819673/9780620629';
 
 const Explore = ({navigation}) => {
   const [search, setSearch] = useState('');
   const [data, setData] = useState<Story[]>([]);
   const ref = useRef<any>(null);
+
+  const {interstitialCount} = useSelector((state: RootState) => state.ads);
+  const dispatch = useAppDispatch();
+  const {isLoaded, isClosed, load, show} = useInterstitialAd(adUnitId);
+  const [selectStory, setSelectStory] = useState<Story>();
 
   const {allStories} = useSelector((state: RootState) => state.global);
 
@@ -33,8 +45,34 @@ const Explore = ({navigation}) => {
     setData(allStories);
   }, [allStories]);
 
-  const handleSearchInput = (search: string) => {
-    setSearch(search);
+  useEffect(() => {
+    if (interstitialCount % 3 === 1) {
+      load();
+    }
+  }, [interstitialCount, load]);
+
+  useEffect(() => {
+    if (isClosed) {
+      // Action after the ad is closed
+      dispatch(incrementInitialState());
+      navigation.navigate('Story', {
+        storyData: selectStory ? selectStory : data[0],
+      });
+    }
+  }, [isClosed, navigation, data, dispatch, selectStory]);
+
+  const handleStoryClick = (item: Story) => {
+    if (isLoaded) {
+      setSelectStory(item);
+      show();
+    } else {
+      dispatch(incrementInitialState());
+      navigation.navigate('Story', {storyData: item});
+    }
+  };
+
+  const handleSearchInput = (_search: string) => {
+    setSearch(_search);
     setData(
       allStories.filter(
         (story: Story) =>
@@ -46,10 +84,7 @@ const Explore = ({navigation}) => {
 
   const renderStory: ListRenderItem<Story> = ({item}) => {
     return (
-      <StoryCard
-        storyData={item}
-        onCardClick={() => navigation.navigate('Story', {storyData: item})}
-      />
+      <StoryCard storyData={item} onCardClick={() => handleStoryClick(item)} />
     );
   };
 
