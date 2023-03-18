@@ -32,9 +32,7 @@ import {APP_PLAY_STORE_LINK} from '../../utils/constants';
 
 const adUnitId = __DEV__
   ? 'ca-app-pub-3940256099942544/6300978111'
-  : 'ca-app-pub-4599375922819673/6696874865';
-
-// 'ca-app-pub-4599375922819673~5852311459';
+  : 'ca-app-pub-4599375922819673/5659674109';
 
 const Story = (props: Props) => {
   const {navigation, route} = props;
