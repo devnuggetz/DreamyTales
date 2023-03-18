@@ -16,16 +16,15 @@ const adUnitId = __DEV__
 
 const TopStories = (props: NavigationAsProps) => {
   const {navigation} = props;
+  const {topStories} = useSelector((state: RootState) => state.global);
 
   const {interstitialCount} = useSelector((state: RootState) => state.ads);
   const dispatch = useAppDispatch();
   const {isLoaded, isClosed, load, show} = useInterstitialAd(adUnitId);
   const [selectStory, setSelectStory] = useState<Story>();
 
-  const {topStories} = useSelector((state: RootState) => state.global);
-
   useEffect(() => {
-    if (interstitialCount % 1 === 0) {
+    if (interstitialCount % 3 === 1) {
       load();
     }
   }, [interstitialCount, load]);
